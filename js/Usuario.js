@@ -35,7 +35,6 @@ class Usuario {
         return this._clave;
     }
 
-
     // métodos setter
     set fRegistro(fecha) {
         this._fRegistro = fecha;
@@ -45,8 +44,6 @@ class Usuario {
 
 }
 // fin clase Usuario
-
-
 
 
 ///funcion que crea un nuevo usuario cada vez que se rellena el registro y se pulsa el input
@@ -91,6 +88,6 @@ function fechaHoy() {
 
 // Lógica para mostrar el usuarios 
 function mostrarUsuario() {
-    let salida = getElementById("salidaUsuarios");
-    let cadena = "<p>"+this._nombre+"</p>";
+    let usuario = "<p>"+this._nombre+"</p>";
+    return usuario;
 }

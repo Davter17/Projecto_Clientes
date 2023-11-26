@@ -353,6 +353,36 @@ footer .enlaces a:hover {
   transform: scale(1.5);
 }
 
+#chatroom{
+    display: flex;
+    flex-direction: row;
+}
+
+#chatroom .usuarios{
+    flex-basis: 50%;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+#chatroom .mensajes{
+    flex-basis: 50%;
+    box-sizing: border-box;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+#chatroom .mensajes .mensaje{
+}
+
+#chatroom .mensajes .mensaje .posicion_izquierda{
+    align-self:flex-start
+}
+
+#chatroom .mensajes .mensaje .posicion_derecha{
+    align-self: flex-end;
+}
+
 /* ----- breakpoint para controlar punt de ruptura del margen --- */
 @media only screen and (max-width: 1050px) {
     .contenedor {
