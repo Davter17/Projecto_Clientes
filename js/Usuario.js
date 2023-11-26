@@ -87,3 +87,10 @@ function fechaHoy() {
     let y = h.getFullYear();
     return fechaRegistro = d + "/" + m + "/" + y + "";
 }
+
+
+// Lógica para mostrar el usuarios 
+function mostrarUsuario() {
+    let salida = getElementById("salidaUsuarios");
+    let cadena = "<p>"+this._nombre+"</p>";
+}
