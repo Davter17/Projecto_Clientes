@@ -13,7 +13,7 @@ class Usuario {
         this._clave = clave;
 
         // se rellenará al crear el Usuario
-        this._fRegistro = "";
+        this._fRegistro = fechaHoy();
         this._ultimoAcceso = "";
     }
 
@@ -59,7 +59,7 @@ function registrar() {
 
     let nuevoUsu = new Usuario(nombre, apellidos, fechaNacimiento, email, clave);
     //introducimos la fecha del dia que se crea el Usuario usando una funcion
-    nuevoUsu.fRegistro(fechaHoy());
+    // nuevoUsu.fRegistro(fechaHoy());
 
 
     //convertimos el usuario en un documento JSON 
