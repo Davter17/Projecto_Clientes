@@ -1,10 +1,10 @@
-class Mensage {
-    constructor(emisor, receptor, contenido, marcaTemporal) {
+class Mensaje {
+    constructor(emisor, receptor, contenido) {
 
         this._emisor = emisor;
         this._receptor = receptor;
         this._contenido = contenido;
-        this._marcaTemporal = marcaTemporal;
+        this._marcaTemporal = new Date();
     }
 
     // metodos getters
@@ -40,18 +40,16 @@ class Mensage {
     }
 
     set marcaTemporal(marcaTemporal) {
-        this._marcaTemporal = marcaTemporal;
+        this._marcaTemporal = new Date();
     }
 
     // Lógica para mostrar un mensaje en el documento
     mostrarMensaje(posicion) {
-        let mensaje = "<div class='mensaje'>";
-        if (posicion == "LD") {
-            mensaje = "<div class='posicion_derecha'>";
-        } else {
-            mensaje = "<div class='posicion_derecha'>";
-        }
-        mensaje += this._marcaTemporal + "<p>" + this._contenido + "</p></div></div>";
+        let mensaje = "<div class='mensaje ";
+        
+        mensaje += posicion+"'>";
+    
+        mensaje += "<div>"+this._marcaTemporal.getUTCHours()+":"+this._marcaTemporal.getUTCMinutes() + "</div><p>" + this._contenido + "</p></div>";
         return mensaje;
     }
 }

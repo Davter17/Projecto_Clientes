@@ -43,21 +43,20 @@ class Chat {
 
     //función que muestra la conversación entre dos usuarios
     mostrarChat(emisor,receptor){
-        let cadena;
+        let cadena="";
         this._mensajes.forEach(mensaje => {
-            if(mensaje.emisor == emisor && mensaje.receptor == receptor){
-                cadena += mensaje.mostrarMensaje("LD");
+            if(mensaje.emisor == emisor.nombre && mensaje.receptor == receptor.nombre){
+                cadena += mensaje.mostrarMensaje("derecha");
             }
-            if(mensaje.emisor == receptor && mensaje.receptor == emisor){
-                cadena += mensaje.mostrarMensaje("LI");
+            if(mensaje.emisor == receptor.nombre && mensaje.receptor == emisor.nombre){
+                cadena += mensaje.mostrarMensaje("izquierda");
             }
         });
-
         return cadena;
     }
     //función que muestra los usuarios del chat en el docucmento
     mostrarUsuarios(){
-        let cadena;
+        let cadena = "";
         this._usuarios.forEach(usuario => {
                cadena += usuario.mostrarUsuario();
         });

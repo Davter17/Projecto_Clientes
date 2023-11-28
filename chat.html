@@ -70,20 +70,25 @@
     <!-- FIN HEADER -->
 
     <!-- CUERPO -->
-    <main>
-        <div id="#chatroom" class="contenedor">
-            <h1>CharRoom</h1>
+    <main class="contenedor">
+        <h1>ChatRoom</h1>
+        <div id="chatroom">
             <section class="usuarios">
-                <div class="salidaUsuarios">
+                <div id="salidaUsuarios">
 
                 </div>
-            </div>
+            </section>
             <section class="mensajes">
-                <div class="salidaMensajes">
+                <div id="salidaMensajes">
 
                 </div>
-                
-            </div>
+                <div>
+                    <form action="#">
+                        <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje">
+                        <input type="button" id="enviarM" name="enviarM" value="Enviar" onclick="enviarMensaje()">
+                    </form>
+                </div>
+            </section>
         </div>
 
     </main>

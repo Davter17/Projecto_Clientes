@@ -13,7 +13,7 @@ class Usuario {
         this._clave = clave;
 
         // se rellenará al crear el Usuario
-        this._fRegistro = fechaHoy();
+        this._fRegistro = this.fecha();
         this._ultimoAcceso = "";
     }
 
@@ -40,7 +40,18 @@ class Usuario {
         this._fRegistro = fecha;
     }
 
+    // Lógica para mostrar el usuarios 
+    mostrarUsuario() {
+        let usuario = "<p>"+this._nombre+"</p>";
+        return usuario; 
+    }   
 
+    
+    // funcion que devuelve la fecha actual en formato D/M/A
+    fecha() {
+        let h = new Date();
+        return  h.getDate() + "/" + h.getMonth() + "/" + h.getFullYear()+ "";
+}
 
 }
 // fin clase Usuario
@@ -76,18 +87,4 @@ function registrar() {
 
 
 
-// funcion que devuelve la fecha actual en formato D/M/A
-function fechaHoy() {
-    let h = new Date();
-    let d = h.getDate();
-    let m = h.getMonth();
-    let y = h.getFullYear();
-    return fechaRegistro = d + "/" + m + "/" + y + "";
-}
 
-
-// Lógica para mostrar el usuarios 
-function mostrarUsuario() {
-    let usuario = "<p>"+this._nombre+"</p>";
-    return usuario;
-}
