@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     botonAltaUsuario.addEventListener("click", function() {
         // Redirigir a registro.html al hacer clic en "Alta usuario"
-        window.location.href = "registro.html";
+        window.location.href = "iniciarSesion.html";
     });
 });
+
