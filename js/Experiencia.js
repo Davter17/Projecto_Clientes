@@ -10,7 +10,7 @@ constructor(autor,titulo,descripcion,fCreacion,imagen){
     this._descripcion=descripcion,
     this._imagen=imagen;
     
-    this._fCreacion="";
+    this._fCreacion=new Date();
 
 }
 
@@ -57,6 +57,17 @@ arrayExperiencias=[];
 
 // funcion que crea nueva experiencia
 function nuevaExperiencia(){
+
+let titulo=document.getElementById("titulo_experiencia").value;
+let descripcion=document.getElementById("descripcion").value;
+
+// sacar usuario del LS
+// let autor=
+
+
+let nuevaExp=new Experiencia(autor,titulo,descripcion,fCreacion,imagen)
+    
+    
 
 
 }
