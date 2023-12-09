@@ -44,9 +44,6 @@ class Experiencia {
     }
 
 
-
-
-
 }
 // fin clase Experiencias
 
@@ -71,21 +68,70 @@ function nuevaExperiencia() {
     arrayExperiencias.push(nuevaExp);
     localStorage.setItem(titulo, JSON.stringify(nuevaExp));
 
+    //llamar funcion de mostrar experiencia cuando se crea una experiencia
+    mostrarExperiencias();
 }
 
+//funcion para eliminar la experiencia
+function eliminarExperiencia(index) {
+    //Elimina la experiencia del array
+    arrayExperiencias.splice(index, 1);
 
+    // Elimina la experiencia del localStorage
+    localStorage.removeItem(arrayExperiencias[index].titulo);
 
-function mostrarExperiencia(){
+    // Vuelve a mostrar las experiencias actualizadas
+    mostrarExperiencias();
+}
 
-
+    //funcion de mostrar experiencia
+    function mostrarExperiencias() {
+        let container = document.getElementById("misExperiencias");
     
+        // Limpiamos el contenido actual de la div
+        container.innerHTML = "";
+    
+        // Recorremos el array de experiencias y creamos tarjetas
+        arrayExperiencias.forEach((experiencia, index) => {
+            let card = document.createElement("div");
+            card.classList.add("card");
+    
+            // Contenido de la tarjeta
+            card.innerHTML = `
+                <img src="${experiencia.imagen}" alt="${experiencia.titulo}">
+                <h3>${experiencia.titulo}</h3>
+                <p>Autor: ${experiencia.autor}</p>
+                <p>Descripción: ${experiencia.descripcion}</p>
+                <p>Fecha de creación: ${experiencia.fCreacion}</p>
+                <button onclick="eliminarExperiencia(${index})">Eliminar</button>
+            `;
+    
+            // Agregamos la tarjeta al contenedor
+            container.appendChild(card);
+        });
+    }
+    
+        //cuando entras en la pagina llama la funcion con los cards dentro de localStorage
+    document.addEventListener("DOMContentLoaded", function () {
+        cargarExperienciasGuardadas();
+    });
 
 
+//funcion para cargar experiencia guardad
+function cargarExperienciasGuardadas() {
+    //Limpiar array
+    arrayExperiencias = [];
+
+    //recorrer las claves en localStorage y añadir las experiencias al array
+    for (let i = 0; i < localStorage.length; i++) {
+        let clave = localStorage.key(i);
+        let experienciaGuardada = JSON.parse(localStorage.getItem(clave));
+        arrayExperiencias.push(experienciaGuardada);
+    }
+
+    //Mostramos las experiencias al cargar la página
+    mostrarExperiencias();
 }
-
-
-
-
 
 
 
