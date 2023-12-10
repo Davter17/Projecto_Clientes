@@ -53,6 +53,8 @@ function registrar() {
         guardar("usuarios", usuarios);
 
         alert("Usuario creado con éxito");
+
+        window.location.href = "iniciarSesion.html";
     } else{
         alert("Lo siento, este email ya está registrado.");
     }
