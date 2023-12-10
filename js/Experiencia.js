@@ -28,6 +28,11 @@ class Experiencia {
     get imagen() {
         return this._imagen;
     }
+    
+
+get fCreacion(){
+     return this._fCreacion;
+}
 
     // metodos setter
     set autor(nombre) {
@@ -126,6 +131,7 @@ function cargarExperienciasGuardadas() {
     for (let i = 0; i < localStorage.length; i++) {
         let clave = localStorage.key(i);
         let experienciaGuardada = JSON.parse(localStorage.getItem(clave));
+        experienciaGuardada.__proto__=new Experiencia();
         arrayExperiencias.push(experienciaGuardada);
     }
 
