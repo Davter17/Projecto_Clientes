@@ -49,7 +49,7 @@ class Mensaje {
         
         mensaje += posicion+"'>";
     
-        mensaje += "<div>"+this._marcaTemporal.getUTCHours()+":"+this._marcaTemporal.getUTCMinutes() + "</div><p>" + this._contenido + "</p></div>";
+        mensaje += "<div>"+this._marcaTemporal.getUTCHours().toString().padStart(2,"0")+":"+this._marcaTemporal.getUTCMinutes().toString().padStart(2,"0") + "</div><p>" + this._contenido + "</p></div>";
         return mensaje;
     }
 }

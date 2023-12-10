@@ -45,10 +45,10 @@ class Chat {
     mostrarChat(emisor,receptor){
         let cadena="";
         this._mensajes.forEach(mensaje => {
-            if(mensaje.emisor == emisor.nombre && mensaje.receptor == receptor.nombre){
+            if(mensaje.emisor == emisor && mensaje.receptor == receptor){
                 cadena += mensaje.mostrarMensaje("derecha");
             }
-            if(mensaje.emisor == receptor.nombre && mensaje.receptor == emisor.nombre){
+            if(mensaje.emisor == receptor && mensaje.receptor == emisor){
                 cadena += mensaje.mostrarMensaje("izquierda");
             }
         });
@@ -57,9 +57,10 @@ class Chat {
     //función que muestra los usuarios del chat en el docucmento
     mostrarUsuarios(){
         let cadena = "";
-        this._usuarios.forEach(usuario => {
-               cadena += usuario.mostrarUsuario();
-        });
+        
+        for(i=0;i<this._usuarios.length();i++){
+                cadena += "<span>"+this._usuarios[i].username+"<button id='"+i+"'>Chatear</button></span>";
+        }
         return cadena;
     }
 
@@ -86,8 +87,9 @@ class Chat {
                 element.__proto__ = new Mensaje();
             });
         }
-        return mensajesGuardados
+        this._mensajes = mensajesGuardados;
     }
+
 
     //funcion que lee los usuarios guardados en el localStorage
     leerUsuarios(){
@@ -100,7 +102,7 @@ class Chat {
                 element.__proto__ = new Usuario();
             });
         }
-        return usuariosGuardados
+        this._usuarios = usuariosGuardados;
     }
 
     //función que guarda el chat al localstorage
