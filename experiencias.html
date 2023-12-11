@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style/estilo.css">
 </head>
 
-<body>
+<body onload="comprobarLogin();mostrarExperiencias();">
     <!-- CABECERA -->
     <header class="bg-principal">
         <div class="contenedor cabecera">
@@ -26,10 +26,10 @@
                     </summary>
                     <ul class="menu-movil">
                         <li><a href="/">Inicio</a></li>
-                        <li><a href="#">Experiencias</a></li>
+                        <li><a href="experiencias.html">Experiencias</a></li>
                         <li><a href="#">Contacto</a></li>
-                        <li class="btn"><button type="button">Iniciar sesión</button></li>
-                        <li class="btn"><button type="button">Alta usuario</button></li>
+                        <li class="btn"><a href="login.html"><button type="button">Iniciar sesión</button></a></li>
+                        <li class="btn"><a href="registro.html"><button type="button">Alta usuario</button></a></li>
                     </ul>
                 </details>
             </nav>
@@ -44,7 +44,7 @@
             <nav id="menu-principal">
                 <ul>
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="/#experiencias">Experiencias</a></li>
+                    <li><a href="experiencias.html">Experiencias</a></li>
                     <li><a href="#">Contacto</a></li>
 
                     <!-- <li><a herf="#">Conócenos</a></li> -->
@@ -52,11 +52,10 @@
             </nav>
 
             <!-- caja con botenes para incio de sesion y dar de alta usuario -->
-            <div class="botones-sesion">
-                <button type="button">Iniciar sesión</button>
-                <button type="button">Alta usuario</button>
+            <div class="botones-sesion" id="enlaces-session">
+                <a href="login.html"><button type="button">Iniciar sesión</button></a>
+                <a href="registro.html"><button type="button">Alta usuario</button></a>
             </div>
-
             <button type="button" class="icon-user mostrar-movil">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 448 512">
                     <path
@@ -73,54 +72,12 @@
 
 
     <main>
+        <section class="seccion-experiencias">
+            <h2>Experiencias</h2>
+            <div id="experiencias" class="contenedor experiencias">
 
-        <h2>Crear experiencia</h2>
-<div class="contenedor-formulario">
-
-    <!-- fomrmulario para crear experiencia -->
-    <form action="#" id="nuevaExpForm">
-        
-        <fieldset>
-            
-            <legend>Información experiencia</legend>
-              <!-- autor -->
-              <p>
-                <label for="autor_experiencia">Autor</label>
-                <input type="text" name="autor_experiencia" id="autor_experiencia" value="Nombre">
-            </p>
-            <!-- titulo -->
-            <p>
-                <label for="titulo">Título</label>
-                <input type="text" name="titulo_experiencia" id="titulo_experiencia" value="Viaje a ...">
-            </p>
-                       
-            <!-- imagen -->
-             <p>
-                <label for="imagen">Imagen</label>
-                <input type="fyle" name="imagen_experiencia" id="img_experiencia" value="Nombre/RutaImg">
-            </p>
-            
-            <!-- descripción -->
-            <p>
-                
-                <label for="descripción"></label>
-                <textarea name="descripcion" id="descripcion" cols="80"
-                rows="20">Describe tu experiencia...</textarea>
-            </p>
-
-          
-            
-            <p><input type="button" class="boton" value="Añadir" onclick="nuevaExperiencia()"></p>
-            
-            
-            
-        </fieldset>
-        
-    </form>
-    
-</div>
-
-
+            </div>
+        </section>
     </main>
     <!-- FIN CUERPO -->
 
@@ -175,8 +132,11 @@
     </footer>
     <!-- FIN FOOTER-->
 
-    <script  src="js/Experiencia.js"></script>
-
+    <script src="js/Experiencia.js"></script>
+    <script src="js/Usuario.js"></script>
+    <script src="js/Mensaje.js"></script>
+    <script src="js/Chat.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

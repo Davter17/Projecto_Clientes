@@ -12,7 +12,8 @@
 
 </head>
 
-<body>
+<body onload="comprobarLogin();">
+
 
     <!-- CABECERA -->
     <header class="bg-principal">
@@ -28,11 +29,10 @@
                     </summary>
                     <ul class="menu-movil">
                         <li><a href="/">Inicio</a></li>
-                        <li><a href="/#experiencias">Experiencias</a></li>
+                                     <li><a href="experiencias.html">Experiencias</a></li>
                         <li><a href="#">Contacto</a></li>
-                        <li class="btn"><a href="login.html"><a href="login.html"><button type="button">Iniciar sesión</button></a>
-</a></li>
-                        <li class="btn"><a href="/registro.html"><button type="button">Alta usuario</button></a></li>
+                        <li class="btn"><a href="login.html"><button type="button">Iniciar sesión</button></a></li>
+                        <li class="btn"><a href="registro.html"><button type="button">Alta usuario</button></a></li>
                     </ul>
                 </details>
             </nav>
@@ -47,7 +47,7 @@
             <nav id="menu-principal">
                 <ul>
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="/#experiencias">Experiencias</a></li>
+                                 <li><a href="experiencias.html">Experiencias</a></li>
                     <li><a href="#">Contacto</a></li>
 
                     <!-- <li><a herf="#">Conócenos</a></li> -->
@@ -55,10 +55,9 @@
             </nav>
 
             <!-- caja con botenes para incio de sesion y dar de alta usuario -->
-            <div class="botones-sesion">
+            <div class="botones-sesion" id="enlaces-session">
                 <a href="login.html"><button type="button">Iniciar sesión</button></a>
-
-                <button type="button">Alta usuario</button>
+                <a href="registro.html"><button type="button">Alta usuario</button></a>
             </div>
 
             <button type="button" class="icon-user mostrar-movil">

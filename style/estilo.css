@@ -107,6 +107,9 @@ figure.logo {
     display: none;
 }
 
+main{
+    min-height: 70vh;
+}
 
 button,
 .icon-user {
@@ -222,17 +225,17 @@ input,
     margin-top: 50px ;
     margin-bottom: 200px;
 }
-
+#nuevaExpForm fieldset,
 #registerForm, #loginForm{
     width: 300px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-content: center;
     margin-bottom: 50px;
 }
 
-#registerForm label, #loginForm label,
-#registerForm button, #loginForm button{
+main label, main button{
     margin-top: 20px;
 }
 

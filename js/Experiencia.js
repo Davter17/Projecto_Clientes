@@ -43,17 +43,14 @@ class Experiencia {
         this._imagen = imgn;
     }
 
-
-
-
-
 }
 // fin clase Experiencias
 
 
 // creamos un array de Experiencias
 
-arrayExperiencias = [];
+let arrayExperiencias = [];
+cargarExperiencias();
 
 // funcion que crea nueva experiencia
 function nuevaExperiencia() {
@@ -61,7 +58,7 @@ function nuevaExperiencia() {
     let autor = document.getElementById("autor_experiencia").value;
     let titulo = document.getElementById("titulo_experiencia").value;
     let descripcion = document.getElementById("descripcion").value;
-    let imagen=document.getElementById("img_experiencia").value;
+    let imagen=document.getElementById("imagen_experiencia").value;
     let fecha=fechaHoy();
 
     // sacar usuario del LS
@@ -69,22 +66,38 @@ function nuevaExperiencia() {
 
     let nuevaExp = new Experiencia(autor, titulo, descripcion,imagen, fecha)
     arrayExperiencias.push(nuevaExp);
-    localStorage.setItem(titulo, JSON.stringify(nuevaExp));
+    localStorage.setItem("Experiencias", JSON.stringify(arrayExperiencias));
+    alert("Experiencia guardada con exito");
+}
 
+function cargarExperiencias(){
+    let experiencias = localStorage.getItem("Experiencias");
+    experiencias = JSON.parse(experiencias);
+    if (arrayExperiencias != null) {
+
+        experiencias.forEach(element => {
+            element.__proto__ = new Experiencia();
+            arrayExperiencias.push(element);
+        });
+    }
 }
 
 
-
-function mostrarExperiencia(){
-
-
-    
-
-
+function mostrarExperiencias(){
+    let displayExperiencias = document.getElementById("experiencias");
+    let cadena = "";
+    arrayExperiencias.forEach(element => {
+        cadena+="<article>";
+        cadena+="<a href='#'>";
+        cadena+="<img src='"+element.imagen+"' alt='"+element.titulo+"'/>";
+        cadena+="<h4>"+element.titulo+"</h4>";
+        cadena+="<p>"+element.autor+"</p>";
+        cadena+="<p>"+element.descripcion+"</p>";
+        cadena+="</a>";
+        cadena+="</article>";
+    });
+    displayExperiencias.innerHTML = cadena;
 }
-
-
-
 
 
 

@@ -1,29 +1,3 @@
-// function crearUsuariosPruebas(chatroom){
-
-// //funcion que realiza una carga de prueba de usuarios en la web
-//     // let usuariosPruebas = new Array();
-
-//     chatroom.addUsuario(new Usuario("usu1","usuario1", "apellidos1", "12-12-2000", "usuario1@email.es", "1234"));
-//     chatroom.addUsuario(new Usuario("usu2","usuario2", "apellidos2", "12-12-2000", "usuario2@email.es", "1234"));
-//     chatroom.addUsuario(new Usuario("usu4","usuario3", "apellidos3", "12-12-2000", "usuario3@email.es", "1234"));
-//     chatroom.guardarUsuarios();
-// }
-
-// function crearMensajesPruebas(chatroom){
-
-//     //funcion que realiza una carga de prueba de mensajes del chat
-//         // let mensajesPruebas = new Array();
-    
-//         chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Hola!!"));
-//         chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "Hola Que tal"));
-//         chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Me haces un favor?"));
-//         chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta?"));
-//         chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Necesito que me prestes los apuntes de interfaces"));
-//         chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta con ello"));
-
-//         chatroom.guardarMensajes();
-//     }
-
 
 function enviarMensaje(){
     let mnsj = document.getElementById("mensaje").value;
@@ -45,12 +19,28 @@ function registrar() {
     const fechaDeNacimiento = document.getElementById('fecha').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    let encontrado = -1;
+    for(i=0; i < chatroom.usuarios.length ;i++){
+        if (chatroom.usuarios[i].email == email){
+            encontrado = i;
+            break;
+        }
+    }
+    if(encontrado == -1){
+        let usuario = new Usuario(username,nombre,apellidos,fechaDeNacimiento,email,password);
+        chatroom.addUsuario(usuario);
+        alert("Usuario registrado");
+        location.href = 'login.html';
+    }else{
+        alert("El email ya existe.");
+    }
+    
+}
 
-    let usuario = new Usuario(username,nombre,apellidos,fechaDeNacimiento,email,password);
-    chatroom.addUsuario(usuario);
-    alert("Usuario registrado");
-    // location.href = 'login.html';
-    return false;
+function logout() {
+    localStorage.removeItem("userLogin");
+    location.href = 'index.html';
+
 }
 
 function login() {
@@ -69,7 +59,7 @@ function login() {
         if(chatroom.usuarios[i].password = password){
             usuarioLogin = chatroom.usuarios[i];
             localStorage.setItem("userLogin",usuarioLogin.username);
-            location.href = 'chat.html';
+            location.href = 'experiencias.html';
         }else{
             alert("Password incorrecto");
         }
@@ -92,8 +82,8 @@ function mostrarChat(id){
     let displayUsuario = document.getElementById("displayUsuario");
     let displayMensajes = document.getElementById("salidaMensajes");
     let receptor = chatroom.getUsuario(id).username;
-    displayLogin.innerHTML = "Chatroom de "+ usuarioLogin;
-    displayUsuario.innerHTML = receptor;
+    displayLogin.innerHTML = "Chatrooom de "+ usuarioLogin;
+    displayUsuario.innerHTML = "<h3>Chat con: "+receptor+"</h3>";
     localStorage.setItem("receptor",receptor)
     displayMensajes.innerHTML = chatroom.mostrarChat(usuarioLogin,receptor);
 }
@@ -101,13 +91,29 @@ function mostrarChat(id){
 function comprobarLogin(){
     let usuarioLogin  = localStorage.getItem("userLogin");
     if(usuarioLogin!=null){
+        enlacesSesion();
         return usuarioLogin;
     }
-    location.href = 'login.html';   
+    return null;
 }
 
-let chatroom = new Chat();
+function verificarAcceso(){
+    if(localStorage.getItem("userLogin")==null)
+        location.href = 'login.html';
+}
 
+
+function enlacesSesion(){
+    let enlaces = document.getElementById("enlaces-session");
+    let cadena = '<a href="nueva_experiencia.html"><button type="button">Añadir Experiencia</button></a>';
+    cadena += '<a href="chat.html"><button type="button">Chat Usuarios</button></a>';
+    cadena += '<a href="#" onclick="logout();"><button type="button">Cerrar Sesión</button></a>';
+    enlaces.innerHTML = cadena;
+}
+
+
+let chatroom = new Chat();
+let usuarioLogin = comprobarLogin();
 //leemos los datos del localstorage
 chatroom.leerUsuarios(); 
 chatroom.leerMensajes();
