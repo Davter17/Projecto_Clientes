@@ -1,6 +1,5 @@
 class Chat {
     constructor() {
-
         this._usuarios = [];
         this._mensajes = [];
     }
@@ -29,6 +28,7 @@ class Chat {
     // función que añade un ususario
     addUsuario(usuario) {
         this._usuarios.push(usuario);
+        this.guardarUsuarios();
     }
 
     //función que elimina un usuario
@@ -58,8 +58,8 @@ class Chat {
     mostrarUsuarios(){
         let cadena = "";
         
-        for(i=0;i<this._usuarios.length();i++){
-                cadena += "<span>"+this._usuarios[i].username+"<button id='"+i+"'>Chatear</button></span>";
+        for(let i=0;i<this._usuarios.length;i++){
+                cadena += "<span><button id='"+i+"' onclick='mostrarChat("+i+")'>Chatear con "+this._usuarios[i].username+"</button></span>";
         }
         return cadena;
     }

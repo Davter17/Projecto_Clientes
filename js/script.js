@@ -1,27 +1,27 @@
-function crearUsuariosPruebas(){
+function crearUsuariosPruebas(chatroom){
 
 //funcion que realiza una carga de prueba de usuarios en la web
-    let usuariosPruebas = new Array();
+    // let usuariosPruebas = new Array();
 
-    usuariosPruebas.push(new Usuario("usu1","usuario1", "apellidos1", "12-12-2000", "usuario1@email.es", "1234"));
-    usuariosPruebas.push(new Usuario("usu2","usuario2", "apellidos2", "12-12-2000", "usuario2@email.es", "1234"));
-    usuariosPruebas.push(new Usuario("usu4","usuario3", "apellidos3", "12-12-2000", "usuario3@email.es", "1234"));
-
-    return usuariosPruebas;
+    chatroom.addUsuario(new Usuario("usu1","usuario1", "apellidos1", "12-12-2000", "usuario1@email.es", "1234"));
+    chatroom.addUsuario(new Usuario("usu2","usuario2", "apellidos2", "12-12-2000", "usuario2@email.es", "1234"));
+    chatroom.addUsuario(new Usuario("usu4","usuario3", "apellidos3", "12-12-2000", "usuario3@email.es", "1234"));
+    chatroom.guardarUsuarios();
 }
 
-function crearMensajesPruebas(){
+function crearMensajesPruebas(chatroom){
 
     //funcion que realiza una carga de prueba de mensajes del chat
-        let mensajesPruebas = new Array();
+        // let mensajesPruebas = new Array();
     
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Hola!!"));
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "Hola Que tal"));
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Me haces un favor?"));
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta?"));
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Necesito que me prestes los apuntes de interfaces"));
-        mensajesPruebas.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta con ello"));
-        return mensajesPruebas;
+        chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Hola!!"));
+        chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "Hola Que tal"));
+        chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Me haces un favor?"));
+        chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta?"));
+        chatroom.push(new Mensaje(chatroom.usuarios[0], chatroom.usuarios[1], "Necesito que me prestes los apuntes de interfaces"));
+        chatroom.push(new Mensaje(chatroom.usuarios[1], chatroom.usuarios[0], "cuenta con ello"));
+
+        chatroom.guardarMensajes();
     }
 
 
@@ -45,9 +45,10 @@ function registrar() {
     const password = document.getElementById('password').value;
 
     let usuario = new Usuario(username,nombre,apellidos,fechaDeNacimiento,email,password);
-    chatroom.usuarios.push(usuario);
-    chatroom.guardarUsuarios();// guardamos el usuario en el localstorage
+    chatroom.addUsuario(usuario);
+    // chatroom.guardarUsuarios();// guardamos el usuario en el localstorage
     alert("Usuario registrado");
+    location.href = 'login.html';
 
     
     //convertimos el usuario en un documento JSON 
@@ -76,7 +77,7 @@ function login() {
     if(encontrado != -1){
         if(chatroom.usuarios[i].password = password){
             usuarioLogin = chatroom.usuarios[i];
-            localStorage.setItem("user",usuarioLogin.username);
+            localStorage.setItem("userLogin",usuarioLogin.username);
             location.href = 'chat.html';
         }else{
             alert("Password incorrecto");
@@ -88,31 +89,38 @@ function login() {
 
 }
 
-function mostrarChat(username){
+function mostrarUsuarios(){
     let displayUsers = document.getElementById("salidaUsuarios");
     displayUsers.innerHTML = chatroom.mostrarUsuarios();
+}
+
+function mostrarChat(username){
+    let usuarioLogin = comprobarLogin();
     let displayMensajes = document.getElementById("salidaMensajes");
     displayMensajes.innerHTML = chatroom.mostrarChat(usuarioLogin,username);
 }
 
 function comprobarLogin(){
-    let usuarioLogin  = localStorage.getItem("user");
+    let usuarioLogin  = localStorage.getItem("userLogin");
     if(usuarioLogin!=null){
         return usuarioLogin;
     }
+    return null;
 }
 
-let chatroom = new Chat();
-let usuarioLogin  = localStorage.getItem("user");   
+var chatroom = new Chat();
+let usuarioLogin  = comprobarLogin();
 
-chatroom.leerChat(); //leemos los datos del localstorage
+chatroom.leerUsuarios(); //leemos los datos del localstorage
+chatroom.leerMensajes();
 
-if(chatroom.usuarios == null){ // si no hay datos en el localStorage añadimos los de prueba
-    chatroom.usuarios = crearUsuariosPruebas();
-}
 
-if(chatroom.mensajes == null){ // si no hay datos en el localStorage añadimos los de prueba
-chatroom.mensajes = crearMensajesPruebas();
-}
+// if(chatroom.usuarios == null){ // si no hay datos en el localStorage añadimos los de prueba
+    // crearUsuariosPruebas(chatroom);
+// }
+
+// if(chatroom.mensajes == null){ // si no hay datos en el localStorage añadimos los de prueba
+    // crearMensajesPruebas(chatroom);
+// }
 // let usuarioEmisor = chatroom.usuarios[0];
 // let usuarioReceptor = chatroom.usuarios[1];
