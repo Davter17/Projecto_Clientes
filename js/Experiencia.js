@@ -82,26 +82,26 @@ function eliminarExperiencia(index) {
     //Elimina la experiencia del array
     arrayExperiencias.splice(index, 1);
 
+    //mostrar las experiencias actualizadas
+    mostrarExperiencias();
+
     // Elimina la experiencia del localStorage
     localStorage.removeItem(arrayExperiencias[index].titulo);
-
-    // Vuelve a mostrar las experiencias actualizadas
-    mostrarExperiencias();
 }
 
     //funcion de mostrar experiencia
     function mostrarExperiencias() {
         let container = document.getElementById("misExperiencias");
     
-        // Limpiamos el contenido actual de la div
+        //Limpiamos el contenido actual de la div
         container.innerHTML = "";
     
-        // Recorremos el array de experiencias y creamos tarjetas
+        //Recorremos el array de experiencias y creamos tarjetas
         arrayExperiencias.forEach((experiencia, index) => {
             let card = document.createElement("div");
             card.classList.add("card");
     
-            // Contenido de la tarjeta
+            //Contenido de la tarjeta
             card.innerHTML = `
                 <img src="${experiencia.imagen}" alt="${experiencia.titulo}">
                 <h3>${experiencia.titulo}</h3>
@@ -109,6 +109,7 @@ function eliminarExperiencia(index) {
                 <p>Descripción: ${experiencia.descripcion}</p>
                 <p>Fecha de creación: ${experiencia.fCreacion}</p>
                 <button onclick="eliminarExperiencia(${index})">Eliminar</button>
+                <button onclick="modificarExp(${index})">Modificar</button>
             `;
     
             // Agregamos la tarjeta al contenedor
@@ -138,7 +139,35 @@ function cargarExperienciasGuardadas() {
     //Mostramos las experiencias al cargar la página
     mostrarExperiencias();
 }
+//function modificacion
+function modificarExp(index) {
+    //indice o id del card
+    if (index < 0 || index >= arrayExperiencias.length) {
+        alert("Índice de experiencia inválido");
+        return;
+    }
 
+    //la experiencia actual
+    const experienciaActual = arrayExperiencias[index];
+
+    //cambiar experiencia
+    const nuevoAutor = prompt("Nuevo autor:", experienciaActual.autor);
+    const nuevoTitulo = prompt("Nuevo título:", experienciaActual.titulo);
+    const nuevaDescripcion = prompt("Nueva descripción:", experienciaActual.descripcion);
+    const nuevaImagen = prompt("Nueva imagen:", experienciaActual.imagen);
+
+    //actualizacion de los valores
+    experienciaActual.autor = nuevoAutor;
+    experienciaActual.titulo = nuevoTitulo;
+    experienciaActual.descripcion = nuevaDescripcion;
+    experienciaActual.imagen = nuevaImagen;
+
+    //actualizar la experiencia en el localStorage si lo deseas
+    localStorage.setItem(nuevoTitulo, JSON.stringify(experienciaActual));
+
+    //llamar funcion de mostrar el card
+    mostrarExperiencias();
+}
 
 
 // funcion que devuelve la fecha actual en formato D/M/A
