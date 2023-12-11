@@ -1,3 +1,4 @@
+
 // creamos la clase Experiencia
 
 class Experiencia {
@@ -27,11 +28,6 @@ class Experiencia {
     get imagen() {
         return this._imagen;
     }
-    
-
-get fCreacion(){
-     return this._fCreacion;
-}
 
     // metodos setter
     set autor(nombre) {
@@ -47,14 +43,14 @@ get fCreacion(){
         this._imagen = imgn;
     }
 
-
 }
 // fin clase Experiencias
 
 
 // creamos un array de Experiencias
 
-arrayExperiencias = [];
+let arrayExperiencias = [];
+cargarExperiencias();
 
 // funcion que crea nueva experiencia
 function nuevaExperiencia() {
@@ -62,7 +58,7 @@ function nuevaExperiencia() {
     let autor = document.getElementById("autor_experiencia").value;
     let titulo = document.getElementById("titulo_experiencia").value;
     let descripcion = document.getElementById("descripcion").value;
-    let imagen=document.getElementById("img_experiencia").value;
+    let imagen=document.getElementById("imagen_experiencia").value;
     let fecha=fechaHoy();
 
     // sacar usuario del LS
@@ -70,103 +66,40 @@ function nuevaExperiencia() {
 
     let nuevaExp = new Experiencia(autor, titulo, descripcion,imagen, fecha)
     arrayExperiencias.push(nuevaExp);
-    localStorage.setItem(titulo, JSON.stringify(nuevaExp));
-
-    //llamar funcion de mostrar experiencia cuando se crea una experiencia
-    mostrarExperiencias();
+    localStorage.setItem("Experiencias", JSON.stringify(arrayExperiencias));
+    alert("Experiencia guardada con exito");
 }
 
-//funcion para eliminar la experiencia
-function eliminarExperiencia(index) {
-    //Elimina la experiencia del array
-    arrayExperiencias.splice(index, 1);
+function cargarExperiencias(){
+    let experiencias = localStorage.getItem("Experiencias");
+    experiencias = JSON.parse(experiencias);
+    if (arrayExperiencias != null) {
 
-    //mostrar las experiencias actualizadas
-    mostrarExperiencias();
-
-    // Elimina la experiencia del localStorage
-    localStorage.removeItem(arrayExperiencias[index].titulo);
-}
-
-    //funcion de mostrar experiencia
-    function mostrarExperiencias() {
-        let container = document.getElementById("misExperiencias");
-    
-        //Limpiamos el contenido actual de la div
-        container.innerHTML = "";
-    
-        //Recorremos el array de experiencias y creamos tarjetas
-        arrayExperiencias.forEach((experiencia, index) => {
-            let card = document.createElement("div");
-            card.classList.add("card");
-    
-            //Contenido de la tarjeta
-            card.innerHTML = `
-                <img src="${experiencia.imagen}" alt="${experiencia.titulo}">
-                <h3>${experiencia.titulo}</h3>
-                <p>Autor: ${experiencia.autor}</p>
-                <p>Descripción: ${experiencia.descripcion}</p>
-                <p>Fecha de creación: ${experiencia.fCreacion}</p>
-                <button onclick="eliminarExperiencia(${index})">Eliminar</button>
-                <button onclick="modificarExp(${index})">Modificar</button>
-            `;
-    
-            // Agregamos la tarjeta al contenedor
-            container.appendChild(card);
+        experiencias.forEach(element => {
+            element.__proto__ = new Experiencia();
+            arrayExperiencias.push(element);
         });
     }
-    
-        //cuando entras en la pagina llama la funcion con los cards dentro de localStorage
-    document.addEventListener("DOMContentLoaded", function () {
-        cargarExperienciasGuardadas();
+}
+
+
+function mostrarExperiencias(){
+    let displayExperiencias = document.getElementById("experiencias");
+    let cadena = "";
+    arrayExperiencias.forEach(element => {
+        cadena+="<article>";
+        cadena+="<a href='#'>";
+        cadena+="<img src='"+element.imagen+"' alt='"+element.titulo+"'/>";
+        cadena+="<h4>"+element.titulo+"</h4>";
+        cadena+="<p>"+element.autor+"</p>";
+        cadena+="<p>"+element.descripcion+"</p>";
+        cadena+="</a>";
+        cadena+="</article>";
     });
-
-
-//funcion para cargar experiencia guardad
-function cargarExperienciasGuardadas() {
-    //Limpiar array
-    arrayExperiencias = [];
-
-    //recorrer las claves en localStorage y añadir las experiencias al array
-    for (let i = 0; i < localStorage.length; i++) {
-        let clave = localStorage.key(i);
-        let experienciaGuardada = JSON.parse(localStorage.getItem(clave));
-        experienciaGuardada.__proto__=new Experiencia();
-        arrayExperiencias.push(experienciaGuardada);
-    }
-
-    //Mostramos las experiencias al cargar la página
-    mostrarExperiencias();
+    displayExperiencias.innerHTML = cadena;
 }
-//function modificacion
-function modificarExp(index) {
-    //indice o id del card
-    if (index < 0 || index >= arrayExperiencias.length) {
-        alert("Índice de experiencia inválido");
-        return;
-    }
 
-    //la experiencia actual
-    const experienciaActual = arrayExperiencias[index];
 
-    //cambiar experiencia
-    const nuevoAutor = prompt("Nuevo autor:", experienciaActual.autor);
-    const nuevoTitulo = prompt("Nuevo título:", experienciaActual.titulo);
-    const nuevaDescripcion = prompt("Nueva descripción:", experienciaActual.descripcion);
-    const nuevaImagen = prompt("Nueva imagen:", experienciaActual.imagen);
-
-    //actualizacion de los valores
-    experienciaActual.autor = nuevoAutor;
-    experienciaActual.titulo = nuevoTitulo;
-    experienciaActual.descripcion = nuevaDescripcion;
-    experienciaActual.imagen = nuevaImagen;
-
-    //actualizar la experiencia en el localStorage si lo deseas
-    localStorage.setItem(nuevoTitulo, JSON.stringify(experienciaActual));
-
-    //llamar funcion de mostrar el card
-    mostrarExperiencias();
-}
 
 
 // funcion que devuelve la fecha actual en formato D/M/A
@@ -177,4 +110,3 @@ function fechaHoy() {
     let y = h.getFullYear();
     return fechaRegistro = d + "/" + m + "/" + y + "";
 }
-
