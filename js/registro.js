@@ -31,80 +31,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Función registrar nuevos usuarios
 function registrar() {
-    nombre = document.getElementById('name').value;
-    apellidos = document.getElementById('apellido').value;
-    fechaDeNacimiento = document.getElementById('fecha').value;
-    email = document.getElementById('email').value;
-    password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
+    const nombre = document.getElementById('name').value;
+    const apellidos = document.getElementById('apellido').value;
+    const fechaDeNacimiento = document.getElementById('fecha').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    posibilidadCrearUsuario = true;
+    // Guardar en localStorage
+    // localStorage.setItem('nombre', nombre);
+    // localStorage.setItem('apellidos', apellidos);
+    // localStorage.setItem('fecha', fechaDeNacimiento);
+    // localStorage.setItem('fechaRegistro', new Date());
+    // localStorage.setItem('email', email);
+    // localStorage.setItem('pass', password);
 
-    for (i = 0; i < usuarios.length; i++){
+    let usuario = new Usuario(username,nombre,apellidos,fechaDeNacimiento,email,password)
+    alert("Usuario registrado");
 
-        if (email == usuarios[i]._email){
-            posibilidadCrearUsuario = false;
-            break;
+    // Recuperar y mostrar todos los datos excepto la contraseña
+    // const datosRecuperados = {
+    //     nombre: localStorage.getItem('nombre'),
+    //     apellidos: localStorage.getItem('apellidos'),
+    //     fecha: localStorage.getItem('fecha'),
+    //     fechaRegistro: localStorage.getItem('fechaRegistro'),
+    //     email: localStorage.getItem('email')
+    //     // pass: No se incluye la contraseña aquí
+    // };
+
+    // // Mostrar todos los datos recuperados excepto la contraseña
+    // const displayElement = document.getElementById('displayData');
+    // displayElement.innerHTML = `
+    //     Datos recuperados:<br>
+    //     Nombre: ${datosRecuperados.nombre}<br>
+    //     Apellidos: ${datosRecuperados.apellidos}<br>
+    //     Fecha de Nacimiento: ${datosRecuperados.fecha} &#128197;<br> <!-- Calendario Unicode -->
+    //     Fecha de Registro: ${datosRecuperados.fechaRegistro}<br>
+    //     Email: ${datosRecuperados.email}<br>
+    //     <!-- Contraseña: ${datosRecuperados.pass} -->
+    // `;
+}
+
+
+function login() {
+    const nombre = document.getElementById('name').value;
+    const password = document.getElementById('password').value;
+
+    chatroom.usuarios.forEach(element => {
+        if (element.username = username){
+            if(element.password = password){
+                usuarioActual = element;
+                localStorage.getItem(username),
+            }else{
+                alert("Password incorrecto");
+            }
         }
-    }
-
-    if (posibilidadCrearUsuario == true){
-        usuarioNuevo = new Usuario(nombre, apellidos, fechaDeNacimiento, email, password);
-        usuarios.push(usuarioNuevo);
-        guardar("usuarios", usuarios);
-
-        alert("Usuario creado con éxito");
-
-        window.location.href = "iniciarSesion.html";
-    } else{
-        alert("Lo siento, este email ya está registrado.");
-    }
-
-}
-
-function iniciarSesion() {
-    emailIniciar = document.getElementById('emailIniciar').value;
-    passwordIniciar = document.getElementById('passwordIniciar').value;
-
-    Login = false;
-
-    for (i = 0; i < usuarios.length; i++){
-
-        if (emailIniciar == usuarios[i]._email && passwordIniciar == usuarios[i]._clave){
-            Login = true;
-
-            usuarioActual = usuarios[i];
-            guardar("usuarioActual", usuarioActual);
-            
-            break;
+        else{
+            alert("Nombre de usuario incorrecto");
         }
-    }
+    });
 
-    if (Login == true){
-        darBienvenida();
-
-        return false;
-    } else{
-        alert("Email o contraseña incorrectas. Vuelva a probar");
-    }
-
-}
-
-function darBienvenida(){
-
-    loginForm.style.display = "none";
-    bienvenida.style.display = "block";
-
-    pbienvenida.innerHTML = "Bienvenido " + usuarioActual._nombre;
-}
-
-function Desconectar (){
-    loginForm.style.display = "block";
-    bienvenida.style.display = "none";
-
-    pbienvenida.innerHTML = " ";
-
-    usuarioActual = null;
-    guardar("usuarioActual", usuarioActual);
-
-    alert("Usuario desconectado con éxito");
 }

@@ -4,7 +4,7 @@ class Mensaje {
         this._emisor = emisor;
         this._receptor = receptor;
         this._contenido = contenido;
-        this._marcaTemporal = new Date();
+        this._marcaTemporal = this.tiempo();
     }
 
     // metodos getters
@@ -43,13 +43,16 @@ class Mensaje {
         this._marcaTemporal = new Date();
     }
 
+    tiempo() {
+        let h = new Date();
+        return  h.getUTCHours().toString().padStart(2,"0") + ":" + h.getUTCMinutes().toString().padStart(2,"0");
+    }
+
     // Lógica para mostrar un mensaje en el documento
     mostrarMensaje(posicion) {
         let mensaje = "<div class='mensaje ";
-        
         mensaje += posicion+"'>";
-    
-        mensaje += "<div>"+this._marcaTemporal.getUTCHours()+":"+this._marcaTemporal.getUTCMinutes() + "</div><p>" + this._contenido + "</p></div>";
+        mensaje += "<div>"+ this._marcaTemporal+ "</div><p>" + this._contenido + "</p></div>";
         return mensaje;
     }
 }

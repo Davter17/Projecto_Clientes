@@ -207,7 +207,7 @@ input,
     margin: 0;
     border-radius: 3px;
     border: 1px solid rgb(105, 43, 28);
-    padding: .5em 2em;
+    padding: .5em .5em;
 }
 
 .boton:hover {
@@ -215,6 +215,26 @@ input,
     color: rgb(105, 43, 28);
 }
 
+.loginUser, .registroUser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px ;
+    margin-bottom: 200px;
+}
+
+#registerForm, #loginForm{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-bottom: 50px;
+}
+
+#registerForm label, #loginForm label,
+#registerForm button, #loginForm button{
+    margin-top: 20px;
+}
 
 /*********SECCIÓN EXPERIENCIAS ******************/
 
@@ -356,27 +376,44 @@ footer .enlaces a:hover {
 #chatroom{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: flex-start;
 }
 
 #chatroom .usuarios{
-    flex-basis: 30%;
+    flex-basis: 24%;
     box-sizing: border-box;
-    padding: 1%;
+    padding: 5%;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px #999;
 }
 
 #chatroom .mensajes{
-    flex-basis: 70%;
+    flex-basis: 75%;
     box-sizing: border-box;
-    padding: 1em;
+    padding: 2%;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px #999;    
 }
+
+
 
 #chatroom .mensajes #salidaMensajes{
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    margin-bottom: 25px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    justify-content: flex-end;
+}
+
+#chatroom .mensajes #salidaMensajes .mensaje{
+    margin: 10px 20px;
 }
 
 #chatroom .mensajes #salidaMensajes .izquierda{
@@ -397,21 +434,24 @@ footer .enlaces a:hover {
     border-radius: 10px 10px 0px 10px;
     box-shadow: 0px 0px 5px lightblue;
 }
-
 #chatroom .mensajes form{
     display: flex;
-    flex-wrap: wrap;
-   justify-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap:10px;
 }
-#chatroom .mensajes textarea{
-   flex-basis: 100%;
-   padding: 1em;
+
+#chatroom .mensajes #mensaje{
+    flex-basis: 100%;
+    padding: 10px;
 }
-#chatroom .mensajes button{
-    flex-basis: 25%;
-    padding: 1em;
+#chatroom .mensajes #enviarM{
+    padding: 10px;
+    width: 25%;
+    align-self: flex-end;
 }
- 
+
+
 /* ----- breakpoint para controlar punt de ruptura del margen --- */
 @media only screen and (max-width: 1050px) {
     .contenedor {

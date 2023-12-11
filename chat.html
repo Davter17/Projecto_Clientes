@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style/estilo.css">
 </head>
 
-<body>
+<body onload="mostrarUsuarios()">
     <!-- CABECERA -->
     <header class="bg-principal">
         <div class="contenedor cabecera">
@@ -28,8 +28,8 @@
                         <li><a href="/">Inicio</a></li>
                         <li><a href="#">Experiencias</a></li>
                         <li><a href="#">Contacto</a></li>
-                        <li class="btn"><button type="button">Iniciar sesión</button></li>
-                        <li class="btn"><button type="button">Alta usuario</button></li>
+                        <li class="btn"><a href="login.html"><button type="button">Iniciar sesión</button></a></li>
+                        <li class="btn"><a href="registro.html"><button type="button">Alta usuario</button></a></li>
                     </ul>
                 </details>
             </nav>
@@ -53,8 +53,8 @@
 
             <!-- caja con botenes para incio de sesion y dar de alta usuario -->
             <div class="botones-sesion">
-                <button type="button">Iniciar sesión</button>
-                <button type="button">Alta usuario</button>
+                <a href="login.html"><button type="button">Iniciar sesión</button></a>
+                <a href="registro.html"><button type="button">Alta usuario</button></a>
             </div>
 
             <button type="button" class="icon-user mostrar-movil">
@@ -71,9 +71,7 @@
 
     <!-- CUERPO -->
     <main class="contenedor">
-        <h1>ChatRoom</h1>
-
-        <h2 id="chatUsuarioHola">Usuario: </h2>
+        <h1 id="tituloChat">ChatRoom</h1>
         <div id="chatroom">
             <section class="usuarios">
                 <div id="salidaUsuarios">
@@ -81,13 +79,14 @@
                 </div>
             </section>
             <section class="mensajes">
+                <div id="displayUsuario"><p>Selecciona un usuario con el que chatear</p></div>
                 <div id="salidaMensajes">
 
                 </div>
                 <div>
                     <form action="#">
-                        <textarea id="mensaje" rows="3" name="mensaje" placeholder="Mensaje"></textarea>
-                        <button type="button" id="enviarM" name="enviarM" value="Enviar" onclick="enviarMensaje()">Enviar mensaje </button>
+                        <textarea row="2" id="mensaje" name="mensaje" placeholder="Mensaje"></textarea>
+                        <button type="button" id="enviarM" name="enviarM" value="Enviar" onclick="enviarMensaje()">Enviar</button>
                     </form>
                 </div>
             </section>
@@ -95,7 +94,6 @@
 
     </main>
     <!-- FIN CUERPO -->
-
 
 
     <!--  INICIO FOOTER -->
@@ -150,7 +148,6 @@
     <script src="js/Clases.js"></script>
     <script src="js/Mensaje.js"></script>
     <script src="js/Chat.js"></script>
-    <script src="js/chatPruebas.js"></script>
     <script src="js/script.js"></script>
 </body>
 
