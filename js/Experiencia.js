@@ -28,6 +28,11 @@ class Experiencia {
     get imagen() {
         return this._imagen;
     }
+    
+
+get fCreacion(){
+     return this._fCreacion;
+}
 
     // metodos setter
     set autor(nombre) {
@@ -42,6 +47,7 @@ class Experiencia {
     set imagen(imgn) {
         this._imagen = imgn;
     }
+
 
 }
 // fin clase Experiencias
@@ -66,38 +72,22 @@ function nuevaExperiencia() {
 
     let nuevaExp = new Experiencia(autor, titulo, descripcion,imagen, fecha)
     arrayExperiencias.push(nuevaExp);
-    localStorage.setItem("Experiencias", JSON.stringify(arrayExperiencias));
-    alert("Experiencia guardada con exito");
-}
+    localStorage.setItem(titulo, JSON.stringify(nuevaExp));
 
-function cargarExperiencias(){
-    let experiencias = localStorage.getItem("Experiencias");
-    experiencias = JSON.parse(experiencias);
-    if (arrayExperiencias != null) {
-
-        experiencias.forEach(element => {
-            element.__proto__ = new Experiencia();
-            arrayExperiencias.push(element);
-        });
-    }
 }
 
 
-function mostrarExperiencias(){
-    let displayExperiencias = document.getElementById("experiencias");
-    let cadena = "";
-    arrayExperiencias.forEach(element => {
-        cadena+="<article>";
-        cadena+="<a href='#'>";
-        cadena+="<img src='"+element.imagen+"' alt='"+element.titulo+"'/>";
-        cadena+="<h4>"+element.titulo+"</h4>";
-        cadena+="<p>"+element.autor+"</p>";
-        cadena+="<p>"+element.descripcion+"</p>";
-        cadena+="</a>";
-        cadena+="</article>";
-    });
-    displayExperiencias.innerHTML = cadena;
+
+function mostrarExperiencia(){
+
+
+    
+
+
 }
+
+
+
 
 
 
