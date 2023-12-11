@@ -1,7 +1,7 @@
 class Chat {
     constructor() {
-        this._usuarios = [];
-        this._mensajes = [];
+        this._usuarios = new Array();
+        this._mensajes = new Array();
     }
 
 
@@ -25,6 +25,21 @@ class Chat {
         this._mensajes = mensajes;
     }
 
+    getUsuario(id){
+        return this._usuarios[id];
+    }
+
+    getId(username){
+        let i=0;
+        while(this._usuarios[i].username == username){
+            i++;    
+        }   
+        if(i < this.usuarios.length)
+            return i;
+        else
+            return null;
+    }
+
     // función que añade un ususario
     addUsuario(usuario) {
         this._usuarios.push(usuario);
@@ -34,16 +49,19 @@ class Chat {
     //función que elimina un usuario
     borrarUsuario(usuario) {
         this._usuarios.splice(usuario, 1);
+        this.guardarUsuarios();
     }
 
     //función que envia un mensaje
     enviarMensaje(mensaje) {
         this.mensajes.push(mensaje);
+        this.guardarMensajes();
+
     }
 
     //función que muestra la conversación entre dos usuarios
     mostrarChat(emisor,receptor){
-        let cadena="";
+        let cadena="";  
         this._mensajes.forEach(mensaje => {
             if(mensaje.emisor == emisor && mensaje.receptor == receptor){
                 cadena += mensaje.mostrarMensaje("derecha");
@@ -57,9 +75,8 @@ class Chat {
     //función que muestra los usuarios del chat en el docucmento
     mostrarUsuarios(){
         let cadena = "";
-        
         for(let i=0;i<this._usuarios.length;i++){
-                cadena += "<span><button id='"+i+"' onclick='mostrarChat("+i+")'>Chatear con "+this._usuarios[i].username+"</button></span>";
+                cadena += "<li><a href='#' onclick='mostrarChat("+i+")'>"+this._usuarios[i].username+"</a></li>";
         }
         return cadena;
     }
@@ -85,9 +102,10 @@ class Chat {
     
             mensajesGuardados.forEach(element => {
                 element.__proto__ = new Mensaje();
+                this._mensajes.push(element);
             });
         }
-        this._mensajes = mensajesGuardados;
+        // this._mensajes = mensajesGuardados;
     }
 
 
@@ -100,9 +118,10 @@ class Chat {
     
             usuariosGuardados.forEach(element => {
                 element.__proto__ = new Usuario();
+                this.addUsuario(element);
             });
         }
-        this._usuarios = usuariosGuardados;
+        // this._usuarios = usuariosGuardados;
     }
 
     //función que guarda el chat al localstorage

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style/estilo.css">
 </head>
 
-<body onload="mostrarUsuarios();comprobarLogin();">
+<body onload="mostrarUsuarios()">
     <!-- CABECERA -->
     <header class="bg-principal">
         <div class="contenedor cabecera">
@@ -71,7 +71,7 @@
 
     <!-- CUERPO -->
     <main class="contenedor">
-        <h1>ChatRoom</h1>
+        <h1 id="tituloChat">ChatRoom</h1>
         <div id="chatroom">
             <section class="usuarios">
                 <div id="salidaUsuarios">
@@ -79,6 +79,7 @@
                 </div>
             </section>
             <section class="mensajes">
+                <div id="displayUsuario"><p>Selecciona un usuario con el que chatear</p></div>
                 <div id="salidaMensajes">
 
                 </div>
